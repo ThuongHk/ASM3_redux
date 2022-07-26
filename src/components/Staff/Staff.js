@@ -9,7 +9,7 @@ import {showDataListStaff} from '../../redux/selector';
 import AddStaff from './AddStaff';  // ko import component addStaff vào component nay anh ạ
 
 function Staff() {
-  const [column, setColumn] = useState(' col-2 mt-2')
+  const [column, setColumn] = useState('col-2 mt-2')
 
   const showStaff = useSelector(showDataListStaff)
   // const showSearchStaff = useSelector()
