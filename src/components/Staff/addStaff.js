@@ -8,28 +8,51 @@ import * as yup from 'yup';
 import './Staff.css';
 
 const schema = yup.object().shape({
+  
   name: yup
     .string()
     .required("Vui lòng nhập username")
     .max(50, "Username tối đa 50 ký tự")
     .min(5, "Username tối thiếu 5 ký tự"),
-    date: yup
+    birthday: yup    
     .string()
-    .required('Vui lòng nhập ngày sinh')
+    .required('Vui lòng nhập ngày sinh'),
+    salaryScale: yup
+    .number()
+    .required('Vui lòng nhập hệ số lương của bạn')
+    .min(1, 'Hệ số lương tối thiếu là 1')
+    .max(5, 'Hệ số lương tối đa là 5'),
+    startDate: yup    
+    .string()
+    .required('Vui lòng nhập ngày vào công ty'),
+    department: yup
+    .string()
+    .required('Vui lòng chọn phòng ban'),
+    annualLeave: yup
+    .number()
+    .required('Vui lòng nhập ngày nghỉ còn lại'),
+    overTime: yup
+    .number(' Vui lòng nhập số ngày làm thêm')
+   
+   
    
 });
+
 
 function AddStaff(props) {
  
   const dispatch = useDispatch();
   const {register, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(schema)}) 
-
-
-  const onLoginSubmit = (data)=>{   
+ 
+ 
+  const onLoginSubmit = (data)=>{  
+    if(data.birthday === 0){
+      alert('Vui lòng nhập ngày sinh của bạn')
+    } 
     dispatch(staffSlice.actions.addStaff({
       id: uuidv4(),
       name: data.name,
-      birthday: data.birthday,
+      birthday: data.birthday,     
       salaryScale: data.salaryScale,
       startDate: data.startDate,
       department: data.department,
@@ -65,18 +88,23 @@ function AddStaff(props) {
           <label for="">Ngày sinh: </label>
           <input type="date"  {...register('birthday')}
             className="form-control"  id="birthday" /> 
-            {errors.date && 
-                      <p className="error">{errors.date?.message}</p>}          
+          
+            {errors.birthday && 
+                      <p className="error">{errors.birthday?.message}</p>}          
         </div>
         <div className="form-group">
           <label for="">Hệ số Lương: </label>
           <input type="number"   {...register('salaryScale')}
-            className="form-control"  id="salaryScale" min='0'/>          
+            className="form-control"  id="salaryScale" min='0'/> 
+             {errors.salaryScale && 
+                      <p className="error">{errors.salaryScale?.message}</p>}          
         </div>
         <div className="form-group">
           <label for="">Ngày vào công ty: </label>
           <input type="date" {...register('startDate')}
-            className="form-control"  id="startDate"  />          
+            className="form-control"  id="startDate"  />   
+            {errors.startDate && 
+                      <p className="error">{errors.startDate?.message}</p>}                 
         </div>
        
           <div className="form-group">
@@ -88,16 +116,22 @@ function AddStaff(props) {
               <option value='IT'>IT</option>
               <option value='Finance'>Finance</option>              
             </select>
+            {errors.department && 
+                      <p className="error">{errors.department?.message}</p>}  
           </div>
           <div className="form-group">
           <label for="">Số ngày nghỉ còn lại: </label>
           <input type="number" {...register('annualLeave')}
-            className="form-control"  id="annualLeave" min='0'  />          
+            className="form-control"  id="annualLeave" min='0'  />   
+             {errors.annualLeave && 
+                      <p className="error">{errors.annualLeave?.message}</p>}         
         </div>
         <div className="form-group">
           <label for="">Số ngày làm thêm: </label>
           <input type="number" {...register('overTime')}
-            className="form-control"  id="overTime" min='0' />          
+            className="form-control"  id="overTime" min='0' /> 
+            {errors.overTime && 
+                      <p className="error">{errors.overTime?.message}</p>}          
         </div>
         <div class="form-group">
           <label for="">Hình đại diện</label>
