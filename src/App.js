@@ -7,9 +7,9 @@ import './App.css';
 export default function App() {
   return (
     <div>
-       <NavBar/>        
-    <Outlet/>
-    <Footer/>
+      <NavBar/>        
+      <Outlet/>
+      <Footer/>
     </div>
   )
 }

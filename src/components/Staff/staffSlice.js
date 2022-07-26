@@ -15,7 +15,8 @@ const staffSlice = createSlice({
             state.searchStaff = action.payload
         },
         addStaff: (state, action) =>{
-            state.staffs.STAFFS.push(action.payload)
+            console.log(action);
+            state.addStaff.push(action.payload)
         }
     }
 })

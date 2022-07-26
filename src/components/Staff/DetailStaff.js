@@ -19,7 +19,7 @@ function DetailStaff(props) {
     { 
   <div className="col-sm-6 col-md-6 mb-4">   
   <Card>
-  <div class='row'>
+  <div className='row'>
       <div className="col-6">
     <CardImg width="auto" height="100%" src={staffInfo.image} alt={staffInfo.name} />
     </div>

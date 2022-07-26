@@ -29,23 +29,34 @@ function NavBar() {
 
   }
     return (
-        <div className='container-fluid'>
-            <Navbar color='primary' className='nav'>
-             
-              <NavbarBrand color='primary' className='navb text-light'>
-                 <i className="fas fa-cannabis"></i>{'  '}
-                <Link   
-                className={theme1} onClick={handleClickTheme1} to='/staff' > <i className="fas fa-clipboard-user"></i> <small>Nhân Viên</small> </Link>{'  '}
-                 <Link 
-                 className={theme2} onClick={handleClickTheme2} to='department'  > <i className="fas fa-id-card-alt"></i> <small> Phòng Ban</small></Link> {'  '}
-                <Link 
-                className={theme3} onClick={handleClickTheme3} to='/salary'  ><i class="fa-solid fa-money-bill-1"></i><small>Bảng Lương</small></Link>
-                </NavbarBrand>         
-             
-            </Navbar>
-          
-         
-        </div>
+      <div className='container-fluid'>
+          <Navbar color='primary' className='nav'>
+            <div color='primary' className='navb text-light'>
+                <i className="fas fa-cannabis"></i>
+              <div>
+                <Link   className={theme1} onClick={handleClickTheme1}
+                to='/staff' > 
+              <i className="fas fa-clipboard-user"></i>
+                 Nhân Viên
+                </Link>
+              </div>
+              <div >
+                <Link className={theme2} onClick={handleClickTheme2}
+                to='department'  >
+              <i className="fas fa-id-card-alt"></i>
+                  Phòng Ban
+                </Link>
+              </div>
+              <div>
+                <Link  className={theme3} onClick={handleClickTheme3}
+                to='/salary'  >
+              <i className="fa-solid fa-money-bill-1"></i>
+                  Bảng Lương
+                </Link>
+              </div>
+            </div>
+          </Navbar>
+      </div>
     );
 }
 
