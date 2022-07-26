@@ -3,18 +3,20 @@ import {useDispatch} from'react-redux';
 import staffSlice from './staffSlice';
 import {v4 as uuidv4} from 'uuid';
 import {useForm} from 'react-hook-form';
-import {yupResolver} from '@hookfrom/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup'; // Không tìm thấy 
 import * as yup from 'yup';
+import './Staff.css';
 
 const schema = yup.object().shape({
   name: yup
     .string()
     .required("Vui lòng nhập username")
-    .max(50, "username tối đa 50 ký tự"),
-    // birthday: yup
-    // .string()
-    // .required("Vui lòng nhập mật khẩu")s
-    // .max(20, "mật khẩu tối đa 20 ký tự")
+    .max(50, "Username tối đa 50 ký tự")
+    .min(5, "Username tối thiếu 5 ký tự"),
+    date: yup
+    .string()
+    .required('Vui lòng nhập ngày sinh')
+   
 });
 
 function AddStaff(props) {
@@ -62,7 +64,9 @@ function AddStaff(props) {
         <div className="form-group">
           <label for="">Ngày sinh: </label>
           <input type="date"  {...register('birthday')}
-            className="form-control"  id="birthday" />          
+            className="form-control"  id="birthday" /> 
+            {errors.date && 
+                      <p className="error">{errors.date?.message}</p>}          
         </div>
         <div className="form-group">
           <label for="">Hệ số Lương: </label>
