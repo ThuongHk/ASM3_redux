@@ -3,7 +3,7 @@ import {useDispatch} from'react-redux';
 import staffSlice from './staffSlice';
 import {v4 as uuidv4} from 'uuid';
 import {useForm} from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup'; // Không tìm thấy 
+import { yupResolver } from '@hookform/resolvers/yup'; 
 import * as yup from 'yup';
 import './Staff.css';
 
@@ -32,9 +32,8 @@ const schema = yup.object().shape({
     .number()
     .required('Vui lòng nhập ngày nghỉ còn lại'),
     overTime: yup
-    .number(' Vui lòng nhập số ngày làm thêm')
-   
-   
+    .number()  
+    .required(' Vui lòng nhập số ngày làm thêm')   
    
 });
 
@@ -46,9 +45,7 @@ function AddStaff(props) {
  
  
   const onLoginSubmit = (data)=>{  
-    if(data.birthday === 0){
-      alert('Vui lòng nhập ngày sinh của bạn')
-    } 
+   
     dispatch(staffSlice.actions.addStaff({
       id: uuidv4(),
       name: data.name,
@@ -87,8 +84,7 @@ function AddStaff(props) {
         <div className="form-group">
           <label for="">Ngày sinh: </label>
           <input type="date"  {...register('birthday')}
-            className="form-control"  id="birthday" /> 
-          
+            className="form-control"  id="birthday" />           
             {errors.birthday && 
                       <p className="error">{errors.birthday?.message}</p>}          
         </div>
@@ -108,7 +104,7 @@ function AddStaff(props) {
         </div>
        
           <div className="form-group">
-            <label for="department"></label>
+            <label for="department">Phòng ban:</label>
             <select className="form-control" {...register('department')} id="department" >
               <option value='Sale'>Sale</option>
               <option value='HR'>HR</option>
