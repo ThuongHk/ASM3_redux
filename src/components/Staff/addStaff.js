@@ -5,7 +5,6 @@ import {v4 as uuidv4} from 'uuid';
 import {useForm} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'; 
 import * as yup from 'yup';
-import {useState} from 'react'
 import './Staff.css';
 
 const schema = yup.object().shape({
@@ -31,22 +30,23 @@ const schema = yup.object().shape({
     // .required('Vui lòng chọn phòng ban'),
     annualLeave: yup
     .number()
-    .required('Vui lòng nhập ngày nghỉ còn lại'),
+    .required('Vui lòng nhập ngày nghỉ còn lại')
+    .min(1, 'Ngày nghỉ còn lại tối thiếu là 1')
+    .max(5, 'Ngày nghỉ còn lại tối đa là 5'),
     overTime: yup
     .number()  
-    .required(' Vui lòng nhập số ngày làm thêm')   
+    .required(' Vui lòng nhập số ngày làm thêm') 
+    .min(1, 'Số ngày làm thêm tối thiếu là 1')
+    .max(5, 'Số ngày làm thêm tối đa là 5'),  
    
 });
 
 
 function AddStaff(props) {
  
-  const dispatch = useDispatch();
-  const [department, setDepartment] = useState();
+  const dispatch = useDispatch();  
   const {register, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(schema)}) 
-  const handleOnchangeDepartment = (e) => {
-    setDepartment(e.target.value)
-  }
+
  
   const onLoginSubmit = (data)=>{  
    
@@ -56,7 +56,7 @@ function AddStaff(props) {
       birthday: data.birthday,     
       salaryScale: data.salaryScale,
       startDate: data.startDate,
-      department: department,
+      department: data.department,
       annualLeave: data.annualLeave,
       overTime: data.overTime,
       image: '/assets/images/daidien.png'
@@ -109,7 +109,7 @@ function AddStaff(props) {
        
           <div className="form-group">
             <label for="department">Phòng ban:</label>
-            <select className="form-control" value={department} onChange={handleOnchangeDepartment} {...register('department')} id="department" >
+            <select className="form-control"  {...register('department')} id="department" >
               <option value='Sale'>Sale</option>
               <option value='HR'>HR</option>
               <option value='Marketing'>Marketing</option>

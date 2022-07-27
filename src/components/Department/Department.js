@@ -1,11 +1,11 @@
 import React from 'react';
 // import {DEPARTMENTS} from '../Staff/staffs';
 import {useSelector} from 'react-redux';
-import {listDepartment} from '../../redux/selector';
+import {listDepartmentSelector} from '../../redux/selector';
 
 function Department() {
 
-   const departments = useSelector(listDepartment)
+   const departments = useSelector(listDepartmentSelector)
 
     const departmentList  = departments.map(function(department){
         return (

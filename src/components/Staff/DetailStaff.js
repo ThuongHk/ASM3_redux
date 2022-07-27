@@ -5,7 +5,7 @@ import dateFormat from "dateformat";
 // import { STAFFS } from "./staffs";
 import EditStaff from "./EditStaff";
 import { useSelector } from "react-redux";
-import { listStaffSelector } from "../../redux/selector";
+import { listStaffSelector, listDepartmentSelector } from "../../redux/selector";
 
 
 
@@ -13,8 +13,11 @@ import { listStaffSelector } from "../../redux/selector";
 function DetailStaff(props) {
   const params = useParams();
   // console.log(params.name);
-  const staffDetail = useSelector(listStaffSelector)
- 
+  const staffDetail = useSelector(listStaffSelector);
+  // const listDepartment1 = useSelector(listDepartmentSelector)
+  // const listDepartment2 = listDepartment1.map(department =>{
+  //   return (department.name)
+  // })
   const staffInfo = staffDetail.find(staff => staff.id.toString() === params.id)
 
   // console.log("staff", staffInfo); 
@@ -38,7 +41,7 @@ function DetailStaff(props) {
       <CardText>
        <b>Ngày vào công ty:</b>  {dateFormat(staffInfo.startDate, "dd/mm/yyyy")}
       </CardText>
-      <CardText><b>Phòng ban:</b> {staffInfo.name}</CardText>
+      <CardText><b>Phòng ban:</b> {staffInfo.department}</CardText>
       <CardText><b>Số ngày nghỉ còn lại:</b> {staffInfo.annualLeave}</CardText>
       <CardText><b>Số ngày đã làm thêm:</b> {staffInfo.overTime}</CardText>
     </CardBody>
