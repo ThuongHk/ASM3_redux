@@ -5,6 +5,7 @@ import {v4 as uuidv4} from 'uuid';
 import {useForm} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'; 
 import * as yup from 'yup';
+import {useState} from 'react'
 import './Staff.css';
 
 const schema = yup.object().shape({
@@ -25,9 +26,9 @@ const schema = yup.object().shape({
     startDate: yup    
     .string()
     .required('Vui lòng nhập ngày vào công ty'),
-    department: yup
-    .string()
-    .required('Vui lòng chọn phòng ban'),
+    // department: yup
+    // .string()
+    // .required('Vui lòng chọn phòng ban'),
     annualLeave: yup
     .number()
     .required('Vui lòng nhập ngày nghỉ còn lại'),
@@ -41,8 +42,11 @@ const schema = yup.object().shape({
 function AddStaff(props) {
  
   const dispatch = useDispatch();
+  const [department, setDepartment] = useState();
   const {register, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(schema)}) 
- 
+  const handleOnchangeDepartment = (e) => {
+    setDepartment(e.target.value)
+  }
  
   const onLoginSubmit = (data)=>{  
    
@@ -52,7 +56,7 @@ function AddStaff(props) {
       birthday: data.birthday,     
       salaryScale: data.salaryScale,
       startDate: data.startDate,
-      department: data.department,
+      department: department,
       annualLeave: data.annualLeave,
       overTime: data.overTime,
       image: '/assets/images/daidien.png'
@@ -105,15 +109,15 @@ function AddStaff(props) {
        
           <div className="form-group">
             <label for="department">Phòng ban:</label>
-            <select className="form-control" {...register('department')} id="department" >
+            <select className="form-control" value={department} onChange={handleOnchangeDepartment} {...register('department')} id="department" >
               <option value='Sale'>Sale</option>
               <option value='HR'>HR</option>
               <option value='Marketing'>Marketing</option>
               <option value='IT'>IT</option>
               <option value='Finance'>Finance</option>              
             </select>
-            {errors.department && 
-                      <p className="error">{errors.department?.message}</p>}  
+            {/* {errors.department && 
+                      <p className="error">{errors.department?.message}</p>}   */}
           </div>
           <div className="form-group">
           <label for="">Số ngày nghỉ còn lại: </label>

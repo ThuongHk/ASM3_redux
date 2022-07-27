@@ -2,14 +2,20 @@ import React, {useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {Card, CardBody, CardTitle, Navbar, NavbarBrand, CardImg, CardText } from 'reactstrap';
 import dateFormat from "dateformat";
-import { STAFFS } from "./staffs";
+// import { STAFFS } from "./staffs";
+import EditStaff from "./EditStaff";
+import { useSelector } from "react-redux";
+import { listStaffSelector } from "../../redux/selector";
+
+
 
 
 function DetailStaff(props) {
   const params = useParams();
   // console.log(params.name);
+  const staffDetail = useSelector(listStaffSelector)
  
-  const staffInfo = STAFFS.find(staff => staff.id.toString() === params.id)
+  const staffInfo = staffDetail.find(staff => staff.id.toString() === params.id)
 
   // console.log("staff", staffInfo); 
 
@@ -39,6 +45,8 @@ function DetailStaff(props) {
     </div>
     </div>
   </Card>
+
+  <EditStaff/>
   </div>
 }
 </div>)
