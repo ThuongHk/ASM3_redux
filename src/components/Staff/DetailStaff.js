@@ -12,12 +12,9 @@ import { listStaffSelector, listDepartmentSelector } from "../../redux/selector"
 
 function DetailStaff(props) {
   const params = useParams();
-  // console.log(params.name);
+  
   const staffDetail = useSelector(listStaffSelector);
-  // const listDepartment1 = useSelector(listDepartmentSelector)
-  // const listDepartment2 = listDepartment1.map(department =>{
-  //   return (department.name)
-  // })
+ 
   const staffInfo = staffDetail.find(staff => staff.id.toString() === params.id)
 
   // console.log("staff", staffInfo); 

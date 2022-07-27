@@ -48,8 +48,7 @@ function AddStaff(props) {
   const {register, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(schema)}) 
 
  
-  const onLoginSubmit = (data)=>{  
-   
+  const onLoginSubmit = (data)=> {     
     dispatch(staffSlice.actions.addStaff({
       id: uuidv4(),
       name: data.name,
