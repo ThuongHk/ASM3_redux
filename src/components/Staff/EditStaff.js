@@ -68,7 +68,7 @@ const EditStaff = () => {
             className="form-control"  id="overTime" min='0' /> 
             
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <label for="">Hình đại diện</label>
           <input type="file"  placeholder="/assets/images/alberto.png"
            className="form-control-file" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" name="file" id="file" />          

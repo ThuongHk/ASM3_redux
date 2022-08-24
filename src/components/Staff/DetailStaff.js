@@ -1,26 +1,31 @@
-import React, {useState } from "react";
+import React, {useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {Card, CardBody, CardTitle, Navbar, NavbarBrand, CardImg, CardText } from 'reactstrap';
 import dateFormat from "dateformat";
 // import { STAFFS } from "./staffs";
 import EditStaff from "./EditStaff";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { listStaffSelector, listDepartmentSelector } from "../../redux/selector";
+import { getDepartments } from "../Department/departmentSlice";
+import { getStaffs } from "./staffSlice";
 
 
 
 
 function DetailStaff(props) {
   const params = useParams();
-  // console.log(params.name);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //  dispatch(getDepartments())
+  //  dispatch(getStaffs())
+  // },[])
+  
   const staffDetail = useSelector(listStaffSelector);
-  // const listDepartment1 = useSelector(listDepartmentSelector)
-  // const listDepartment2 = listDepartment1.map(department =>{
-  //   return (department.name)
-  // })
+//   const department = useSelector(listDepartmentSelector);
+ console.log(staffDetail);
   const staffInfo = staffDetail.find(staff => staff.id.toString() === params.id)
 
-  // console.log("staff", staffInfo); 
+  console.log( staffInfo); 
 
   return (
   <div className="container mt-5">

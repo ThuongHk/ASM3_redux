@@ -18,7 +18,7 @@ function Salary() {
 
     const salaryShowScreen = salaryList.map(function(salary){
         return(
-          <div className="col-md-4 col-sm-6 col-xs-12 mb-2 mt-3">
+          <div className="col-md-4 col-sm-6 col-xs-12 mb-2 mt-3" key={salary.id}>
               <div className="card" style={{width: '18rem'}}> 
               <div className="card-body">
               <h5 className="card-title">{salary.name}</h5>
