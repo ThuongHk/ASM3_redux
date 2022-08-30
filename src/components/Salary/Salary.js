@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import {STAFFS} from '../Staff/staffs';
 import {Link} from 'react-router-dom';
-import {useSelector} from 'react-redux';
-import { listStaffSelector } from '../../redux/selector';
+import {useDispatch, useSelector} from 'react-redux';
+import { listSalarySelector, listStaffSelector } from '../../redux/selector';
+import { getSalary } from './salarySlice';
 
 
 
 
 function Salary() {
+  const dispatch = useDispatch();
+ 
+   useEffect(() => {
+  dispatch(getSalary())
+   }, [])
 
-  const salaryList = useSelector(listStaffSelector)
+  const salaryList = useSelector(listSalarySelector)
 
      function showSalary(scale, time){
         const show = scale*3000000 + time*200000

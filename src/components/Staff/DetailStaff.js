@@ -1,19 +1,27 @@
-import React, {useState } from "react";
+import React, {useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {Card, CardBody, CardTitle, Navbar, NavbarBrand, CardImg, CardText } from 'reactstrap';
 import dateFormat from "dateformat";
 // import { STAFFS } from "./staffs";
 import EditStaff from "./EditStaff";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { listStaffSelector, listDepartmentSelector } from "../../redux/selector";
+import { getDepartment } from "../Department/departmentSlice";
 
 
 
 
 function DetailStaff(props) {
   const params = useParams();
+  console.log(params);
+  const dispatch = useDispatch();
   
+  useEffect(() => {
+    dispatch(getDepartment())
+  }, [])
   const staffDetail = useSelector(listStaffSelector);
+  const staffDepartment = useSelector(listDepartmentSelector)
+  console.log(staffDepartment);
  
   const staffInfo = staffDetail.find(staff => staff.id.toString() === params.id)
 
@@ -38,7 +46,7 @@ function DetailStaff(props) {
       <CardText>
        <b>Ngày vào công ty:</b>  {dateFormat(staffInfo.startDate, "dd/mm/yyyy")}
       </CardText>
-      <CardText><b>Phòng ban:</b> {staffInfo.department}</CardText>
+      <CardText><b>Phòng ban:</b> {staffDepartment.map((dep)=> {if(dep.id === staffInfo.departmentId){return(<b>{dep.name}</b>) }})}</CardText>
       <CardText><b>Số ngày nghỉ còn lại:</b> {staffInfo.annualLeave}</CardText>
       <CardText><b>Số ngày đã làm thêm:</b> {staffInfo.overTime}</CardText>
     </CardBody>
@@ -46,7 +54,7 @@ function DetailStaff(props) {
     </div>
   </Card>
 
-  <EditStaff/>
+  <EditStaff staffEdit={staffInfo}/>
   </div>
 }
 </div>)
